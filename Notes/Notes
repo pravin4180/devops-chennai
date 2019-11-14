@@ -1,0 +1,100 @@
+To create Docker image:
+docker build -t imagename . 
+
+To create a container:
+
+To stop all containers:
+docker stop $(docker ps -q)
+For removing all containers
+docker rm $(docker ps -q)
+Add -f for forcefully remove it when the container is running/started
+
+To create webserver from Docker file using detachable mode so that the process will run in background
+docker run -d --name tomcat1 --hostname tomcat1 boa/tomcat
+
+
+Port forwarding:
+docker run -d --name tomcat1 --hostname tomcat1 -p 8001:80 boa/tomcat
+In this, -p denotes the port forwarding.
+80 - Image level
+8001 -is for routing the requests i.e continer port
+
+curl http://localhost:8001
+
+GIT:
+To clone from Git
+git clone https://github.com/tektutor/ubuntu-ansible.git
+
+
+To create ssh key i.e private key:
+ssh-keygen
+
+Create the container with the custom image:
+docker run -d --name ubuntu1 --hostname ubuntu1 -p 8001:80 -p 2001:22 boa/ansible-ubuntu
+
+nsible_distribution
+To ssh into the container:
+ssh -p 2001 root@localhost
+
+Here 2001 is the ssh port number of the created container
+
+To install Ansible in Linux/CentOS:
+
+sudo yum install ansible -y
+
+
+To run the Ansible hosts file:
+ansible -i hosts all -m ping
+
+ansible -i hosts containername -m ping
+
+ansible -i hosts containername1,containername2 -m ping
+
+
+To run a playbook
+ansible-playbook -i hosts ping.yml
+
+To check the setup module, to check the log, to check the ansible distribution
+ansible -i ../hosts ubuntu1 -m setup | grep distri
+
+To run a service in the target container using adhoc ansible command:
+ansible -i hosts all -m shell -a  "service nginx status"
+
+To view the IP address in single command
+docker inspect containername | grep IPA
+docker inspect -f {{.NetworkSettings.IPAddress}} containername
+
+
+To cut the lines in vim
+dd
+to cut n number of lines,
+ndd
+
+To paste y
+
+To split a file into another file,
+:split filneam
+vertical split
+:vsplit filename
+
+To switch between files,
+Ctrl+ww
+
+To undo,
+Esc and U
+
+To redo
+Esc and R
+
+
+To save,
+:w
+
+TO save and exit 
+:wq
+
+To exit without saving
+:q
+
+
+All things about ansible are available in /etc/ansible/ansible.cfg

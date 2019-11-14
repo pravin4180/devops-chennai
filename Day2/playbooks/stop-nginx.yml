@@ -1,0 +1,7 @@
+- name: This playbook install, cofigure and deploy web pages into nginx
+  hosts: all
+  become: yes
+  tasks:
+    - name: Stop nginx Server
+      #service: name=nginx state=stopped enabled=yes
+      command: service nginx stop
